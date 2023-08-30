@@ -2,23 +2,18 @@ const canvas=document.getElementById("myCanvas");
 canvas.width=200;
 
 const ctx = canvas.getContext("2d");
+
 const road=new Road(canvas.width/2,canvas.width*0.9);
-const car=new Car(road.getLaneCenter(1),100,30,50,"KEYS");
+const car=new Car(road.getLaneCenter(1),100,30,50,"AI");
 const traffic=[
-    new Car(road.getLaneCenter(1),-100,30,50,"DUMMY",2),
-    new Car(road.getLaneCenter(0),-300,30,50,"DUMMY",2),
-    new Car(road.getLaneCenter(2),-300,30,50,"DUMMY",2),
-    new Car(road.getLaneCenter(0),-500,30,50,"DUMMY",2),
-    new Car(road.getLaneCenter(1),-500,30,50,"DUMMY",2),
-    new Car(road.getLaneCenter(1),-700,30,50,"DUMMY",2),
-    new Car(road.getLaneCenter(2),-700,30,50,"DUMMY",2),
+    new Car(road.getLaneCenter(1),-100,30,50,"DUMMY",2)
 ];
 
 animate();
 
 function animate(){
     for(let i=0;i<traffic.length;i++){
-        traffic[i].update(road.borders,[]); 
+        traffic[i].update(road.borders,[]);
     }
     car.update(road.borders,traffic);
 
@@ -34,5 +29,6 @@ function animate(){
     car.draw(ctx,"blue");
 
     ctx.restore();
+
     requestAnimationFrame(animate);
 }
